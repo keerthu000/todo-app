@@ -122,12 +122,17 @@ taskActions.querySelector('.completeTaskButton').addEventListener('click', funct
         const newContent = prompt('Edit Task Content:', content);
         const newDueDate = prompt('Edit Due Date:', dueDate);
 
+        taskItem.classList.add("list-item"); // Reuse your styled class here instead of nesting
+
         taskDetails.innerHTML = `
-        <div class="task-title"><i class="fas fa-tasks"></i> ${newTitle}</div>
-        <div class="task-content"><i class="fas fa-align-left"></i> ${newContent}</div>
-        <div class="task-due-date text-muted"><i class="fas fa-calendar-alt"></i> Due: ${newDueDate}</div>
-        ${completed ? '<div class="badge bg-success mt-2">✅ Task Completed</div>' : ''}
-    `;
+            <div class="task-details">
+                <div class="task-title"><i class="fas fa-tasks"></i> ${title}</div>
+                <div class="task-content"><i class="fas fa-align-left"></i> ${content}</div>
+                <div class="task-due-date text-muted"><i class="fas fa-calendar-alt"></i> Due: ${dueDate}</div>
+                ${completed ? '<div class="badge bg-success mt-2">✅ Task Completed</div>' : '<span class="badge bg-warning text-dark">Pending</span>'}
+            </div>
+        `;
+
     
             removeTaskFromLocalStorage(title);
             saveTaskToLocalStorage({ title: newTitle, content: newContent, dueDate: newDueDate, completed });
